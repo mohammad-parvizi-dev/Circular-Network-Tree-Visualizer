@@ -407,7 +407,7 @@ export default function NetworkGraph({
 
   return (
     <div 
-      className="relative w-full h-[650px] md:h-[750px] bg-brand-bg rounded-brand-global overflow-hidden border border-brand-primary/20 shadow-2xl select-none"
+      className="relative w-full h-full bg-brand-bg rounded-brand-global overflow-hidden border border-brand-primary/20 shadow-2xl select-none"
       ref={containerRef}
       onWheel={handleWheel}
       onMouseDown={handleMouseDown}

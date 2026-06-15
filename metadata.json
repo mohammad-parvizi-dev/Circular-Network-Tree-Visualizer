@@ -1,0 +1,6 @@
+{
+  "name": "Circular Network Tree Visualizer",
+  "description": "An interactive circular hierarchical multi-level network tree graph styled with a high-fidelity Hardware / Specialist Tool design theme, zoom, pan, and real-time node telemetry highlighting.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

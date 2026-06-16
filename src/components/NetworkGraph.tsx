@@ -264,6 +264,17 @@ export default function NetworkGraph({
           childMinAngle = currentMinAngle;
           childMaxAngle = currentMinAngle + childSectorWidth;
           currentMinAngle = childMaxAngle;
+        } else if (C === 1) {
+          // Centered compact sector for only-child subtree to prevent downstream over-spreading
+          if (currentLevel === 2) {
+            childSectorWidth = Math.min(parentSectorWidth, Math.PI / 1.5);
+          } else if (currentLevel === 3) {
+            childSectorWidth = Math.min(parentSectorWidth, Math.PI / 2.5);
+          } else {
+            childSectorWidth = Math.min(parentSectorWidth, Math.PI / 4.0);
+          }
+          childMinAngle = parentAngle - childSectorWidth / 2;
+          childMaxAngle = parentAngle + childSectorWidth / 2;
         }
 
         // Position at center of its allotted sub-sector

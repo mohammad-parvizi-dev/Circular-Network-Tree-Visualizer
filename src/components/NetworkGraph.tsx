@@ -250,6 +250,9 @@ export default function NetworkGraph({
         const childWeight = weights[idx];
         
         let childSectorWidth = 0;
+        let childMinAngle = minSectorAngle;
+        let childMaxAngle = maxSectorAngle;
+
         if (C > 1) {
           // Robust blend to avoid single sub-branches getting squashed to zero.
           // Mix 50% uniform share and 50% weight-proportional share.
@@ -257,15 +260,14 @@ export default function NetworkGraph({
           const weightShare = totalWeight > 0 ? (childWeight / totalWeight) : uniformShare;
           const blendedShare = 0.5 * uniformShare + 0.5 * weightShare;
           childSectorWidth = usedSectorWidth * blendedShare;
+
+          childMinAngle = currentMinAngle;
+          childMaxAngle = currentMinAngle + childSectorWidth;
+          currentMinAngle = childMaxAngle;
         }
 
-        const childMinAngle = currentMinAngle;
-        const childMaxAngle = currentMinAngle + childSectorWidth;
-
-        currentMinAngle = childMaxAngle;
-
         // Position at center of its allotted sub-sector
-        const childAngle = childMinAngle + (childSectorWidth > 0 ? childSectorWidth / 2 : 0);
+        const childAngle = C > 1 ? (childMinAngle + (childSectorWidth > 0 ? childSectorWidth / 2 : 0)) : parentAngle;
         const x = Math.cos(childAngle) * radius;
         const y = Math.sin(childAngle) * radius;
 

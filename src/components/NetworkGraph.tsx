@@ -216,7 +216,19 @@ export default function NetworkGraph({
       let usedSectorWidth = 0;
       if (C > 1) {
         // High fidelity adaptive spacing: spread descendants across 85% of parent sector to fully utilize space
-        const defaultSpread = parentSectorWidth * 0.85;
+        let defaultSpread = parentSectorWidth * 0.85;
+        
+        // If Level 1 has only 1 node, or more generally when the parent sector space is extremely wide (> 270 degrees),
+        // we shouldn't let sibling nodes fly apart to opposite ends of the circle. We cap the spread elegantly.
+        if (N1 === 1 || parentSectorWidth > Math.PI * 1.5) {
+          if (currentLevel === 2) {
+            defaultSpread = Math.min(defaultSpread, 0.35 + (C - 1) * 0.42);
+          } else if (currentLevel === 3) {
+            defaultSpread = Math.min(defaultSpread, 0.22 + (C - 1) * 0.26);
+          } else if (currentLevel === 4) {
+            defaultSpread = Math.min(defaultSpread, 0.14 + (C - 1) * 0.16);
+          }
+        }
         
         // Ensure we satisfy the safe separation and cap it to 98% of the parent sector to avoid bleeding into neighbours
         usedSectorWidth = Math.max(minRequiredSector, defaultSpread);

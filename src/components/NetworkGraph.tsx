@@ -72,17 +72,17 @@ export default function NetworkGraph({
     });
   });
 
-  const ring1Extra = N1 > 4 ? (N1 - 4) * 25 : (N1 <= 2 ? -30 : 0);
-  const ring2Extra = maxL2ChildrenCount > 2 ? (maxL2ChildrenCount - 2) * 40 : 0;
-  const ring3Extra = maxL3ChildrenCount > 2 ? (maxL3ChildrenCount - 2) * 55 : 0;
-  const ring4Extra = maxL4ChildrenCount > 2 ? (maxL4ChildrenCount - 2) * 70 : 0;
+  const ring1Extra = Math.min(45, N1 > 4 ? (N1 - 4) * 8 : (N1 <= 2 ? -20 : 0));
+  const ring2Extra = Math.min(60, maxL2ChildrenCount > 2 ? (maxL2ChildrenCount - 2) * 10 : 0);
+  const ring3Extra = Math.min(80, maxL3ChildrenCount > 2 ? (maxL3ChildrenCount - 2) * 12 : 0);
+  const ring4Extra = Math.min(100, maxL4ChildrenCount > 2 ? (maxL4ChildrenCount - 2) * 15 : 0);
 
   // Graph styling dimensions configuration for 4 concentric levels
   const config: GraphConfig = {
-    ring1Radius: 135 + ring1Extra,
-    ring2Radius: 260 + ring1Extra + ring2Extra,
-    ring3Radius: 395 + ring1Extra + ring2Extra + ring3Extra,
-    ring4Radius: 535 + ring1Extra + ring2Extra + ring3Extra + ring4Extra,
+    ring1Radius: 115 + ring1Extra,
+    ring2Radius: 215 + ring1Extra + ring2Extra,
+    ring3Radius: 315 + ring1Extra + ring2Extra + ring3Extra,
+    ring4Radius: 415 + ring1Extra + ring2Extra + ring3Extra + ring4Extra,
     nodeSizeLevel0: 80,
     nodeSizeLevel1: 58,
     nodeSizeLevel2: 44,
@@ -201,11 +201,48 @@ export default function NetworkGraph({
       const totalWeight = weights.reduce((sum, w) => sum + w, 0);
 
       const parentSectorWidth = maxSectorAngle - minSectorAngle;
-      let currentMinAngle = minSectorAngle;
+
+      // Dynamic spacing thresholds depending on Orbit Radius Level to prevent overlaps
+      let minSeparationAngle = 0.28; // level 2 (approx 16 degrees)
+      if (currentLevel === 3) {
+        minSeparationAngle = 0.16;   // (approx 9 degrees)
+      } else if (currentLevel === 4) {
+        minSeparationAngle = 0.10;   // (approx 5.7 degrees)
+      }
+
+      // Calculate safe minimum sector bounds based on children count
+      const minRequiredSector = (C - 1) * minSeparationAngle;
+
+      let usedSectorWidth = 0;
+      if (C > 1) {
+        // High fidelity adaptive spacing: spread descendants across 85% of parent sector to fully utilize space
+        const defaultSpread = parentSectorWidth * 0.85;
+        
+        // Ensure we satisfy the safe separation and cap it to 98% of the parent sector to avoid bleeding into neighbours
+        usedSectorWidth = Math.max(minRequiredSector, defaultSpread);
+        usedSectorWidth = Math.min(parentSectorWidth * 0.98, usedSectorWidth);
+      } else {
+        usedSectorWidth = 0;
+      }
+
+      // Center the children's sector exactly around the parent's angle for symmetry and harmony
+      const cl_minAngle = parentAngle - usedSectorWidth / 2;
+      const cl_maxAngle = parentAngle + usedSectorWidth / 2;
+
+      let currentMinAngle = cl_minAngle;
 
       children.forEach((childNode, idx) => {
         const childWeight = weights[idx];
-        const childSectorWidth = parentSectorWidth * (childWeight / totalWeight);
+        
+        let childSectorWidth = 0;
+        if (C > 1) {
+          // Robust blend to avoid single sub-branches getting squashed to zero.
+          // Mix 50% uniform share and 50% weight-proportional share.
+          const uniformShare = 1 / C;
+          const weightShare = totalWeight > 0 ? (childWeight / totalWeight) : uniformShare;
+          const blendedShare = 0.5 * uniformShare + 0.5 * weightShare;
+          childSectorWidth = usedSectorWidth * blendedShare;
+        }
 
         const childMinAngle = currentMinAngle;
         const childMaxAngle = currentMinAngle + childSectorWidth;
@@ -213,7 +250,7 @@ export default function NetworkGraph({
         currentMinAngle = childMaxAngle;
 
         // Position at center of its allotted sub-sector
-        const childAngle = childMinAngle + childSectorWidth / 2;
+        const childAngle = childMinAngle + (childSectorWidth > 0 ? childSectorWidth / 2 : 0);
         const x = Math.cos(childAngle) * radius;
         const y = Math.sin(childAngle) * radius;
 

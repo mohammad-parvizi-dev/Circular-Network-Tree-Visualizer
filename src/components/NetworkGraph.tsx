@@ -51,6 +51,9 @@ export default function NetworkGraph({
   // Hovered node state for tooltip
   const [hoverNode, setHoverNode] = useState<LayoutNode | null>(null);
 
+  // Track images that fail to load
+  const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
+
   // Calculate dynamic expansion parameters to prevent overcrowding
   const level1Nodes = rootNode.children || [];
   const N1 = level1Nodes.length;
@@ -1035,7 +1038,7 @@ export default function NetworkGraph({
                     <circle r={r - (item.level === 0 ? 3 : 1)} />
                   </clipPath>
                   
-                  {item.node.avatar?.file?.image ? (
+                  {item.node.avatar?.file?.image && !failedImages[item.node.userId] ? (
                     <image
                       href={item.node.avatar.file.image}
                       x={-r}
@@ -1045,22 +1048,22 @@ export default function NetworkGraph({
                       clipPath={`url(#clip-${item.node.userId}-${item.level})`}
                       preserveAspectRatio="xMidYMid slice"
                       referrerPolicy="no-referrer"
-                      onError={(e) => {
-                        (e.target as SVGImageElement).style.display = "none";
+                      onError={() => {
+                        setFailedImages((prev) => ({ ...prev, [item.node.userId]: true }));
                       }}
                     />
-                  ) : null}
-
-                  {/* Specialist Initial display layout */}
-                  <text
-                    className="fill-white font-mono font-bold tracking-tight text-center pointer-events-none"
-                    textAnchor="middle"
-                    dominantBaseline="central"
-                    y="1"
-                    fontSize={item.level === 0 ? 18 : Math.max(5, Math.min(14, r * 0.70))}
-                  >
-                    {initials}
-                  </text>
+                  ) : (
+                    /* Specialist Initial display layout - ONLY rendered when no avatar image or if it failed to load */
+                    <text
+                      className="fill-white font-mono font-bold tracking-tight text-center pointer-events-none"
+                      textAnchor="middle"
+                      dominantBaseline="central"
+                      y="1"
+                      fontSize={item.level === 0 ? 18 : Math.max(5, Math.min(14, r * 0.70))}
+                    >
+                      {initials}
+                    </text>
+                  )}
                 </g>
 
                 {/* Display Small badge representing children directly underneath of node */}

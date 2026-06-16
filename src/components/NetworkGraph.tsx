@@ -521,9 +521,9 @@ export default function NetworkGraph({
         </div>
       </div>
 
-      {/* 4. Navigation Breadcrumb Stack - Global Radius 20px, Back button using Button Radius 32px */}
+      {/* 4. Navigation Breadcrumb Stack - Positioned beautifully at the top-center of the map */}
       {historyStack.length > 0 && (
-        <div className="absolute top-26 left-6 z-10 flex items-center gap-2 max-w-[80%] bg-brand-card/95 backdrop-blur-md px-3 py-2 rounded-brand-global border border-brand-primary/30 text-[10px] uppercase tracking-wider font-mono shadow-md">
+        <div className="absolute top-6 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2 max-w-[90%] md:max-w-[60%] lg:max-w-[50%] bg-brand-card/95 backdrop-blur-md px-3 py-2 rounded-brand-global border border-brand-primary/30 text-[10px] uppercase tracking-wider font-mono shadow-md">
           <button 
             onClick={onPopHistory}
             className="flex items-center gap-1 text-white hover:bg-brand-secondary px-3.5 py-1 rounded-brand-btn bg-brand-primary/80 transition border border-brand-secondary/30 active:scale-95 text-[9px] uppercase tracking-widest font-sans font-bold cursor-pointer"

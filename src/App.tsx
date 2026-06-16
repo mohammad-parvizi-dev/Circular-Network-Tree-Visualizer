@@ -340,10 +340,10 @@ export default function App() {
       </div>
 
       {/* 🍔 Floating Absolute Hamburger Menu Button - Styled with Button Radius 32px */}
-      <div className="absolute top-6 left-[305px] z-50">
+      <div className="absolute top-[315px] left-6 z-55 w-[285px]">
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className={`h-11 px-5 rounded-brand-btn border flex items-center gap-2.5 transition-all active:scale-95 cursor-pointer backdrop-blur-md text-xs font-mono font-bold tracking-wider uppercase shadow-[0_4px_20px_rgba(0,0,0,0.5)] ${isMenuOpen ? "bg-brand-primary/25 border-brand-primary text-white" : "bg-brand-card/95 border-brand-primary/30 text-brand-secondary hover:bg-brand-primary/10 hover:border-brand-secondary"}`}
+          className={`h-11 w-full justify-center px-5 rounded-brand-btn border flex items-center gap-2.5 transition-all active:scale-95 cursor-pointer backdrop-blur-md text-xs font-mono font-bold tracking-wider uppercase shadow-[0_4px_20px_rgba(0,0,0,0.5)] ${isMenuOpen ? "bg-brand-primary/25 border-brand-primary text-white" : "bg-brand-card/95 border-brand-primary/30 text-brand-secondary hover:bg-brand-primary/10 hover:border-brand-secondary"}`}
         >
           <div className="flex flex-col gap-1 w-4 items-end">
             <span className={`h-0.5 bg-current transition-all ${isMenuOpen ? "w-4 rotate-45 translate-y-1" : "w-4"}`} />

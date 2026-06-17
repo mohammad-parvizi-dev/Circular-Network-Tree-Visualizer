@@ -8,210 +8,45 @@ import { UserNode } from "./types";
 // User's exact initial tree data from the request prompt
 const RAW_INITIAL_TREE_DATA: UserNode[] = [
   {
-    "avatar": {
-      "type": "STATIC",
-      "file": {
-        "id": 0,
-        "image": "https://api.web3hub.pro/static/2.jpg"
-      }
-    },
-    "nickname": "web3hub",
-    "userId": "0xW3HTOV#x02042",
-    "parent_id": "0xW3HLTX#x08227",
-    "join_date": "2025-02-10T19:14:56.575298Z",
+    "avatar": null,
+    "nickname": "stage-0",
+    "userId": "0xW3H5A4B2C#x01001",
+    "parent_id": null,
+    "join_date": "2025-01-01T00:00:00.000Z",
     "level_from_you": 0,
     "rank": "Citizens",
     "direct_referrals": 2,
-    "total_network_size": 10140,
-    "total_team_volume": "25038385000000000000000000",
+    "total_network_size": 2,
+    "total_team_volume": "10000000000000000000000",
     "personal_sales_volume": "0",
     "children": [
       {
-        "avatar": {
-          "type": "STATIC",
-          "file": {
-            "id": 0,
-            "image": "https://api.web3hub.pro/static/2.jpg"
-          }
-        },
-        "nickname": "alpharency",
-        "userId": "0xW3HMUA#x07741",
-        "parent_id": "0xW3HTOV#x02042",
-        "join_date": "2025-02-10T21:05:12.102862Z",
-        "level_from_you": 1,
-        "rank": "Consultants",
-        "direct_referrals": 2,
-        "total_network_size": 10137,
-        "personal_sales_volume": "1000000000000000000000",
-        "total_team_volume": "24787385000000000000000000",
-        "has_children": true,
-        "children": [
-          {
-            "avatar": {
-              "type": "STATIC",
-              "file": {
-                "id": 15,
-                "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&auto=format&fit=crop&q=60"
-              }
-            },
-            "nickname": "alpha-1",
-            "userId": "0xW3HXPH#x05035",
-            "parent_id": "0xW3HMUA#x07741",
-            "join_date": "2025-02-10T21:23:12.145790Z",
-            "level_from_you": 2,
-            "rank": "Sales Associates",
-            "direct_referrals": 2,
-            "total_network_size": 1468,
-            "personal_sales_volume": "0",
-            "total_team_volume": "3929180000000000000000000",
-            "has_children": true,
-            "children": [
-              {
-                "avatar": {
-                  "type": "STATIC",
-                  "file": {
-                    "id": 9,
-                    "image": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=150&auto=format&fit=crop&q=60"
-                  }
-                },
-                "nickname": "phoneix",
-                "userId": "0xW3HRON#x04849",
-                "parent_id": "0xW3HXPH#x05035",
-                "join_date": "2025-02-10T21:27:08.621856Z",
-                "level_from_you": 3,
-                "rank": "Agents",
-                "direct_referrals": 2,
-                "total_network_size": 746,
-                "personal_sales_volume": "5000000000000000000000",
-                "total_team_volume": "2127120000000000000000000",
-                "has_children": true,
-                "children": []
-              },
-              {
-                "avatar": null,
-                "nickname": "web3sunceo",
-                "userId": "0xW3HYIO#x09154",
-                "parent_id": "0xW3HXPH#x05035",
-                "join_date": "2025-02-10T21:31:57.652571Z",
-                "level_from_you": 3,
-                "rank": "Agents",
-                "direct_referrals": 5,
-                "total_network_size": 720,
-                "personal_sales_volume": "1000000000000000000000",
-                "total_team_volume": "1801060000000000000000000",
-                "has_children": true,
-                "children": []
-              }
-            ]
-          },
-          {
-            "avatar": {
-              "type": "STATIC",
-              "file": {
-                "id": 8,
-                "image": "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=150&auto=format&fit=crop&q=60"
-              }
-            },
-            "nickname": "alpha-2",
-            "userId": "0xW3HZBU#x06424",
-            "parent_id": "0xW3HMUA#x07741",
-            "join_date": "2025-02-10T21:28:06.014575Z",
-            "level_from_you": 2,
-            "rank": "Citizens",
-            "direct_referrals": 2,
-            "total_network_size": 8667,
-            "personal_sales_volume": "0",
-            "total_team_volume": "20750255000000000000000000",
-            "has_children": true,
-            "children": [
-              {
-                "avatar": {
-                  "type": "STATIC",
-                  "file": {
-                    "id": 75,
-                    "image": "https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?w=150&auto=format&fit=crop&q=60"
-                  }
-                },
-                "nickname": "movangaurd",
-                "userId": "0xW3HRVY#x06273",
-                "parent_id": "0xW3HZBU#x06424",
-                "join_date": "2025-02-10T21:33:19.369878Z",
-                "level_from_you": 3,
-                "rank": "Mentors",
-                "direct_referrals": 2,
-                "total_network_size": 8663,
-                "personal_sales_volume": "0",
-                "total_team_volume": "20741255000000000000000000",
-                "has_children": true,
-                "children": []
-              },
-              {
-                "avatar": {
-                  "type": "STATIC",
-                  "file": {
-                    "id": 8,
-                    "image": "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=150&auto=format&fit=crop&q=60"
-                  }
-                },
-                "nickname": "xmind",
-                "userId": "0xW3HEAM#x01511",
-                "parent_id": "0xW3HZBU#x06424",
-                "join_date": "2025-02-20T16:02:41.072157Z",
-                "level_from_you": 3,
-                "rank": "Citizens",
-                "direct_referrals": 2,
-                "total_network_size": 2,
-                "personal_sales_volume": "0",
-                "total_team_volume": "5000000000000000000000",
-                "has_children": true,
-                "children": []
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "avatar": {
-          "type": "STATIC",
-          "file": {
-            "id": 22,
-            "image": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=150&auto=format&fit=crop&q=60"
-          }
-        },
-        "nickname": "web3hubpro",
-        "userId": "0xW3HGVC#x06965",
-        "parent_id": "0xW3HTOV#x02042",
-        "join_date": "2025-02-13T18:54:52.770201Z",
+        "avatar": null,
+        "nickname": "citizen-1",
+        "userId": "0xW3H1A2B3C#x02002",
+        "parent_id": "0xW3H5A4B2C#x01001",
+        "join_date": "2025-01-02T00:00:00.000Z",
         "level_from_you": 1,
         "rank": "Citizens",
-        "direct_referrals": 1,
-        "total_network_size": 1,
+        "direct_referrals": 0,
+        "total_network_size": 0,
         "personal_sales_volume": "0",
-        "total_team_volume": "2000000000000000000000",
-        "has_children": true,
-        "children": [
-          {
-            "avatar": {
-              "type": "STATIC",
-              "file": {
-                "id": 0,
-                "image": "https://api.web3hub.pro/static/2.jpg"
-              }
-            },
-            "nickname": "alpharency-pro",
-            "userId": "0xW3HEYH#x02958",
-            "parent_id": "0xW3HGVC#x06965",
-            "join_date": "2026-05-11T10:00:26.161383Z",
-            "level_from_you": 2,
-            "rank": "Citizens",
-            "direct_referrals": 0,
-            "total_network_size": 0,
-            "personal_sales_volume": "0",
-            "total_team_volume": "1000000000000000000000",
-            "has_children": false,
-            "children": []
-          }
-        ]
+        "total_team_volume": "500000000000000000000",
+        "children": []
+      },
+      {
+        "avatar": null,
+        "nickname": "citizen-2",
+        "userId": "0xW3H9E8D7C#x03003",
+        "parent_id": "0xW3H5A4B2C#x01001",
+        "join_date": "2025-01-03T00:00:00.000Z",
+        "level_from_you": 1,
+        "rank": "Citizens",
+        "direct_referrals": 0,
+        "total_network_size": 0,
+        "personal_sales_volume": "0",
+        "total_team_volume": "500000000000000000000",
+        "children": []
       }
     ]
   }
@@ -480,5 +315,5 @@ export function ensureTreeHasFourLevels(node: UserNode): UserNode {
 }
 
 export const INITIAL_TREE_DATA: UserNode[] = [
-  ensureTreeHasFourLevels(RAW_INITIAL_TREE_DATA[0])
+  ensureTreeHasFourLevels(generateMockTree("web3hub-root", 4, [2, 3], 0, null))
 ];
